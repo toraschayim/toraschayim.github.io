@@ -1,2 +1,2 @@
-# toraschayim.github.io
+# TorasChayim.github.io
 online website for toraschaim
