@@ -1,4 +1,4 @@
-# Welcome to Toras Chayim
+Welcome to Toras Chayim
 
 >Still under construction
 
