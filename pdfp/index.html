@@ -58,10 +58,7 @@
       <!-- Hidden area for PDF links -->
       <div id="pdf-links" class="mt-4" style="display:none;">
         <h3>PDF Files</h3>
-        <ul class="list-group">
-          <li class="list-group-item"><a href="/pdf/Secular-Zionism.pdf" target="_blank">Secular-Zionism</a></li>
-          <li class="list-group-item"><a href="/pdf/file2.pdf" target="_blank">File 2</a></li>
-        </ul>
+        <ul id="pdf-list" class="list-group"></ul> <!-- Dynamic PDF list -->
       </div>
     </div>
   </div>
@@ -72,14 +69,40 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
+    // Password check function
     function checkPassword() {
       const password = document.getElementById('password').value;
-      const correctPassword = 'yourpassword'; // Replace with your actual password
+      const correctPassword = 'Protected'; // Replace with your actual password
       if (password === correctPassword) {
         document.getElementById('pdf-links').style.display = 'block';
+        loadPDFs();
       } else {
         alert('Incorrect password!');
       }
+    }
+
+    // List of PDFs stored as an embedded JSON-like array
+    const pdfFiles = [
+      { name: "Secular Zionism", url: "pdf/Secular-Zionism.pdf" },
+      // { name: "File 2", url: "/pdf/file2.pdf" },
+      // { name: "File 3", url: "/pdf/file3.pdf" }
+    ];
+
+    // Function to dynamically load PDFs into the list
+    function loadPDFs() {
+      const pdfList = document.getElementById('pdf-list');
+      pdfList.innerHTML = ""; // Clear any existing list items
+
+      pdfFiles.forEach(file => {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+        const link = document.createElement('a');
+        link.href = file.url;
+        link.textContent = file.name;
+        link.target = '_blank'; // Open in a new tab
+        listItem.appendChild(link);
+        pdfList.appendChild(listItem);
+      });
     }
   </script>
 </body>
