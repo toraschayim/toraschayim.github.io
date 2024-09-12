@@ -57,8 +57,8 @@
 
       <!-- Hidden area for PDF links -->
       <div id="pdf-links" class="mt-4" style="display:none;">
-        <h3>PDF Files</h3>
-        <ul id="pdf-list" class="list-group"></ul> <!-- Dynamic PDF list -->
+        <!-- <h3>PDF Files</h3> -->
+        <div id="pdf-list"></div> <!-- Dynamic PDF list grouped by tags -->
       </div>
     </div>
   </div>
@@ -81,27 +81,53 @@
       }
     }
 
-    // List of PDFs stored as an embedded JSON-like array
+    // List of PDFs stored with tags
     const pdfFiles = [
-      { name: "Secular Zionism", url: "pdf/Secular-Zionism.pdf" },
-      // { name: "File 2", url: "/pdf/file2.pdf" },
-      // { name: "File 3", url: "/pdf/file3.pdf" }
+      { name: "Secular Zionism", url: "pdf/Secular-Zionism.pdf", tag: "Hashkafa"},
+      { name: "File 1", url: "/pdf/file1.pdf", tag: "Tag A" },
+      { name: "File 2", url: "/pdf/file2.pdf", tag: "Tag B" },
+      { name: "File 3", url: "/pdf/file3.pdf", tag: "Tag A" },
+      { name: "New File", url: "/pdf/newfile.pdf", tag: "Tag C" }
     ];
 
-    // Function to dynamically load PDFs into the list
+    // Function to dynamically load PDFs grouped by tags
     function loadPDFs() {
       const pdfList = document.getElementById('pdf-list');
       pdfList.innerHTML = ""; // Clear any existing list items
 
-      pdfFiles.forEach(file => {
-        const listItem = document.createElement('li');
-        listItem.className = 'list-group-item';
-        const link = document.createElement('a');
-        link.href = file.url;
-        link.textContent = file.name;
-        link.target = '_blank'; // Open in a new tab
-        listItem.appendChild(link);
-        pdfList.appendChild(listItem);
+      // Group PDFs by tag
+      const groupedByTag = pdfFiles.reduce((groups, file) => {
+        if (!groups[file.tag]) {
+          groups[file.tag] = [];
+        }
+        groups[file.tag].push(file);
+        return groups;
+      }, {});
+
+      // Loop through each tag and display the corresponding PDFs
+      Object.keys(groupedByTag).forEach(tag => {
+        // Create a heading for each tag
+        const tagHeading = document.createElement('h4');
+        tagHeading.textContent = tag;
+        pdfList.appendChild(tagHeading);
+
+        // Create a list for the PDFs under this tag
+        const ul = document.createElement('ul');
+        ul.className = 'list-group mb-3'; // Bootstrap list group with some margin
+
+        // Add each PDF under the tag
+        groupedByTag[tag].forEach(file => {
+          const listItem = document.createElement('li');
+          listItem.className = 'list-group-item';
+          const link = document.createElement('a');
+          link.href = file.url;
+          link.textContent = file.name;
+          link.target = '_blank'; // Open in a new tab
+          listItem.appendChild(link);
+          ul.appendChild(listItem);
+        });
+
+        pdfList.appendChild(ul);
       });
     }
   </script>
