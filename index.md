@@ -1,4 +1,4 @@
-Welcome to Toras Chayim
+Welcome to hashkafa.info
 
 >Still under construction
 
