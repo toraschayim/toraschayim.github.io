@@ -1,13 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Directory</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Files</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 0 15px;
+    }
+
+    .pdf-container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    #pdf-links {
+      margin-top: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- <h1>PDF Files Not Available for Viewing</h1> -->
-    <p>This directory does not list its contents.</p>
-    <p>Go back to the <a href="/">homepage</a>.</p>
+
+  <div class="container">
+    <div class="pdf-container">
+      <h2 class="text-center mb-4">PDF Files</h2>
+      <div id="pdf-links" class="mt-4">
+        <div id="pdf-list"></div> <!-- Dynamic PDF list grouped by tags -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // List of PDFs stored with tags
+    const pdfFiles = [
+    { name: "Propositional-Logic", url: "pdf/Propositional-Logic.pdf", tag: "Hashkafa" },
+    { name: "Ostroff-Heart-of-Emunah", url: "pdf/Ostroff-Heart-of-Emunah.pdf", tag: "Hashkafa" },
+    { name: "Marvel-of-the-Eye.Draft", url: "pdf/Marvel-of-the-Eye.Draft.pdf", tag: "Hashkafa" },
+    { name: "Ostroff-Torah-vs-Evolution", url: "pdf/Ostroff-Torah-vs-Evolution.pdf", tag: "Hashkafa" },
+    { name: "Creator-or-BlindWatchmaker", url: "pdf/Creator-or-BlindWatchmaker.pdf", tag: "Hashkafa" },
+    { name: "Ostroff-Identity-Of-Shafan", url: "pdf/Ostroff-Identity-Of-Shafan.pdf", tag: "Hashkafa" },
+    { name: "Plan-and-Purpose-Draft", url: "pdf/Plan-and-Purpose-Draft.pdf", tag: "Hashkafa" },
+    { name: "BigBang-Is-Speculative", url: "pdf/BigBang-Is-Speculative.pdf", tag: "Hashkafa" }
+    ];
+
+    // Function to dynamically load PDFs grouped by tags
+    function loadPDFs() {
+      const pdfList = document.getElementById('pdf-list');
+      pdfList.innerHTML = ""; // Clear any existing list items
+
+      // Group PDFs by tag
+      const groupedByTag = pdfFiles.reduce((groups, file) => {
+        if (!groups[file.tag]) {
+          groups[file.tag] = [];
+        }
+        groups[file.tag].push(file);
+        return groups;
+      }, {});
+
+      // Loop through each tag and display the corresponding PDFs
+      Object.keys(groupedByTag).forEach(tag => {
+        // Create a heading for each tag
+        const tagHeading = document.createElement('h4');
+        tagHeading.textContent = tag;
+        pdfList.appendChild(tagHeading);
+
+        // Create a list for the PDFs under this tag
+        const ul = document.createElement('ul');
+        ul.className = 'list-group mb-3'; // Bootstrap list group with some margin
+
+        // Add each PDF under the tag
+        groupedByTag[tag].forEach(file => {
+          const listItem = document.createElement('li');
+          listItem.className = 'list-group-item';
+          const link = document.createElement('a');
+          link.href = file.url;
+          link.textContent = file.name;
+          link.target = '_blank'; // Open in a new tab
+          listItem.appendChild(link);
+          ul.appendChild(listItem);
+        });
+
+        pdfList.appendChild(ul);
+      });
+    }
+
+    // Load PDFs when the page loads
+    document.addEventListener("DOMContentLoaded", loadPDFs);
+  </script>
 </body>
 </html>
