@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 import os
-# This is needed only if we are adding a PDF file to "pdf" folder
 
 def generate_js_array(pdf_folder="pdf", tag="Hashkafa"):
     # Initialize an empty list to hold the JavaScript object representations
@@ -13,8 +10,8 @@ def generate_js_array(pdf_folder="pdf", tag="Hashkafa"):
         if filename.endswith(".pdf"):
             # Generate the name by removing only the ".pdf" extension
             name = filename.replace(".pdf", "")
-            # Create the URL path for the PDF file
-            url = f"{pdf_folder}/{filename}"
+            # Create the URL path for the PDF file using just the filename
+            url = f"{filename}"  # Only the filename, no "pdf/" folder prefix
             # Append the JavaScript object to the list
             pdf_files_js.append(f'{{ name: "{name}", url: "{url}", tag: "{tag}" }}')
 
@@ -27,6 +24,3 @@ output_js = generate_js_array()
 
 # Print the generated JavaScript array
 print(output_js)
-
-
-
