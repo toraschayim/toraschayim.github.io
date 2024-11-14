@@ -1,13 +1,5 @@
-/*body, h1, h2, h3, p {
-  font-family: "Times New Roman", Roboto, serif !important;
-}
-*/
-
 body, h1, h2, h3, p {
   font-family: "Times New Roman", Roboto, serif !important;
-  color: #1a1a1a !important; /* Darker text color */
 }
 
-.md-typeset {
-  color: #1a1a1a !important;
-}
+
