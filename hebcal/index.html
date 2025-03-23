@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hebrew Date</title>
+  <script src="dist/bundle.min.js"></script>
+  <script src="dist/date.js" defer></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      text-align: center;
+    }
+    .date-block {
+      margin-bottom: 2em;
+    }
+    .hebrew-date {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .gregorian-date {
+      font-size: 1.2em;
+      color: gray;
+      margin-bottom: 0.5em;
+    }
+    .label {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 0.3em;
+    }
+    input[type="date"] {
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="date-block">
+    <div class="label">Today</div>
+    <div class="hebrew-date" id="todayHebrew"></div>
+    <div class="gregorian-date" id="todayGregorian"></div>
+  </div>
+
+  <label for="datePicker">Pick a date:</label><br>
+  <input type="date" id="datePicker" />
+
+  <div class="date-block hidden" id="selectedBlock">
+    <div class="label">Selected Date</div>
+    <div class="hebrew-date" id="selectedHebrew"></div>
+    <div class="gregorian-date" id="selectedGregorian"></div>
+  </div>
+</body>
+</html>
