@@ -1,0 +1,266 @@
+:root {
+    --primary-color: #005a9c;
+    --secondary-color: #f0f0f0;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --error-color: #d9534f;
+    --success-color: #5cb85c;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align top */
+    min-height: 100vh;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px 30px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    font-size: 1rem;
+}
+
+.form-group input[type="number"] {
+   width: calc(100% - 30px); /* Adjust width to fit degree symbol */
+   display: inline-block;
+   vertical-align: middle;
+}
+.form-group span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 1rem;
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Space between buttons */
+    margin-top: 25px;
+}
+
+.form-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-grow: 1; /* Make buttons share space */
+}
+
+#calculateBtn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#calculateBtn:hover {
+    background-color: #004a80;
+}
+
+#clearBtn {
+    background-color: #6c757d;
+    color: white;
+}
+
+#clearBtn:hover {
+    background-color: #5a6268;
+}
+
+/* --- Loading Indicator --- */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 90, 156, 0.1);
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Error Message --- */
+.error-message {
+    background-color: #f8d7da;
+    color: var(--error-color);
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* --- Results Card --- */
+.results-card {
+    background-color: #e9f5ff; /* Light blue background */
+    border: 1px solid #b3d7ff;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.results-card h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.results-card p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #d6e9ff;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item span {
+    color: #444;
+}
+
+.result-item strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.result-item.small-text {
+    font-size: 0.9em;
+    color: #666;
+}
+.result-item.small-text span {
+    color: #666;
+}
+.result-item.small-text strong {
+     color: #666;
+     font-weight: normal; /* Make DST/LatLon values normal weight */
+}
+
+/* --- Attribution --- */
+.attribution {
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 640px) {
+    body {
+        padding: 10px;
+    }
+    .card {
+        padding: 20px 15px;
+    }
+    .form-actions {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+     h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- Add or modify these styles in your style.css --- */
+
+/* Style the select dropdown like other inputs */
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: white; /* Ensure background color */
+    appearance: none; /* Optional: for custom arrow later if desired */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Add basic arrow indicator */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 10px auto;
+    padding-right: 30px; /* Make space for arrow */
+    cursor: pointer;
+}
+
+/* Style for the disclaimer text */
+.disclaimer {
+    font-size: 0.8em;
+    color: #777;
+    text-align: center;
+    margin-top: 15px;
+    padding: 0 10px; /* Add some padding */
+}
+
+/* --- Keep all your other existing CSS rules --- */
