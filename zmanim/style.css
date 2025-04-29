@@ -1,12 +1,24 @@
+/* --- START OF FILE style.css --- */
+
 :root {
-    --primary-color: #005a9c;
-    --secondary-color: #f0f0f0;
+    --primary-color: #005a9c;    /* NOAA Blue */
+    --secondary-color: #f0f4f8; /* Lighter background */
     --text-color: #333;
     --card-bg: #ffffff;
-    --error-color: #d9534f;
-    --success-color: #5cb85c;
+    --error-color: #d9534f;      /* Standard danger red */
+    --success-color: #5cb85c;    /* Standard success green */
     --border-radius: 8px;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --input-border-color: #ccc;
+    --input-focus-border-color: #80bdff; /* Light blue focus */
+    --button-secondary-bg: #6c757d; /* Grey for Clear button */
+    --button-secondary-hover-bg: #5a6268;
+    --link-color: #005a9c;
+    --result-bg: #e9f5ff;        /* Light blue for results */
+    --result-border: #b3d7ff;
+    --result-text-light: #555;
+    --result-text-dark: #333;
+    --attribution-color: #888;
 }
 
 body {
@@ -16,7 +28,7 @@ body {
     padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align top */
+    align-items: flex-start; /* Align cards to the top */
     min-height: 100vh;
     color: var(--text-color);
     line-height: 1.6;
@@ -40,13 +52,34 @@ h1 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
-.card p {
+/* Introductory paragraph */
+.card > p:first-of-type {
     text-align: center;
     margin-bottom: 25px;
     color: #666;
 }
+
+/* Description section styling */
+.description {
+    text-align: left;
+    font-size: 0.95em;
+    color: var(--result-text-light); /* Using result text color */
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee; /* Light separator */
+    padding-bottom: 20px;
+}
+
+.description p {
+    text-align: left; /* Ensure paragraphs within are left-aligned */
+    margin-bottom: 10px;
+}
+.description p:last-child {
+    margin-bottom: 0;
+}
+
 
 .form-group {
     margin-bottom: 20px;
@@ -59,29 +92,54 @@ h1 {
     color: #555;
 }
 
+/* Shared styles for text/date inputs and select */
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group input[type="number"] {
+.form-group input[type="number"],
+.form-group select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
     border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    box-sizing: border-box;
     font-size: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: white; /* Needed for select background */
 }
 
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--input-focus-border-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Subtle focus glow */
+}
+
+/* Specific style for number input to fit degree symbol */
 .form-group input[type="number"] {
-   width: calc(100% - 30px); /* Adjust width to fit degree symbol */
+   width: calc(100% - 30px);
    display: inline-block;
    vertical-align: middle;
+   margin-right: 5px; /* Space before symbol */
 }
-.form-group span {
+.form-group span { /* Degree symbol */
     display: inline-block;
     vertical-align: middle;
-    margin-left: 5px;
     font-size: 1rem;
 }
 
+/* Select dropdown styling */
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Basic SVG arrow indicator */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 10px auto;
+    padding-right: 30px; /* Make space for arrow */
+    cursor: pointer;
+}
 
 .form-actions {
     display: flex;
@@ -95,9 +153,10 @@ h1 {
     border: none;
     border-radius: 4px;
     font-size: 1rem;
+    font-weight: 500; /* Slightly bolder text */
     cursor: pointer;
     transition: background-color 0.2s ease;
-    flex-grow: 1; /* Make buttons share space */
+    flex-grow: 1;
 }
 
 #calculateBtn {
@@ -106,17 +165,25 @@ h1 {
 }
 
 #calculateBtn:hover {
-    background-color: #004a80;
+    background-color: #004a80; /* Darker blue on hover */
 }
 
 #clearBtn {
-    background-color: #6c757d;
+    background-color: var(--button-secondary-bg);
     color: white;
 }
 
 #clearBtn:hover {
-    background-color: #5a6268;
+    background-color: var(--button-secondary-hover-bg);
 }
+
+/* Disabled button state */
+.form-actions button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 
 /* --- Loading Indicator --- */
 .loading {
@@ -155,46 +222,57 @@ h1 {
 
 /* --- Results Card --- */
 .results-card {
-    background-color: #e9f5ff; /* Light blue background */
-    border: 1px solid #b3d7ff;
+    background-color: var(--result-bg);
+    border: 1px solid var(--result-border);
     border-radius: var(--border-radius);
     padding: 20px;
     margin-top: 25px;
 }
 
-.results-card h2 {
+.results-card h2 { /* Location Name */
     margin-top: 0;
     margin-bottom: 5px;
     color: var(--primary-color);
     text-align: center;
+    font-weight: 600;
 }
 
-.results-card p {
+.results-card p { /* Date Subtitle */
     text-align: center;
+    margin-top: 0; /* Reduce space above date */
     margin-bottom: 20px;
     color: #555;
+    font-size: 1em; /* Reset font size if needed */
 }
 
 .result-item {
     display: flex;
     justify-content: space-between;
+    align-items: center; /* Align items vertically centered */
     padding: 8px 0;
     border-bottom: 1px solid #d6e9ff;
+    min-height: 28px; /* Ensure consistent height */
 }
 
 .result-item:last-child {
     border-bottom: none;
 }
 
+/* Left side label span */
 .result-item span {
     color: #444;
+    flex-shrink: 0; /* Prevent label from shrinking */
+    padding-right: 10px; /* Space between label and value */
 }
 
+/* Right side value */
 .result-item strong {
     color: var(--text-color);
     font-weight: 600;
+    text-align: right; /* Align time/value to the right */
 }
 
+/* Smaller text for secondary info */
 .result-item.small-text {
     font-size: 0.9em;
     color: #666;
@@ -202,9 +280,11 @@ h1 {
 .result-item.small-text span {
     color: #666;
 }
-.result-item.small-text strong {
+.result-item.small-text strong,
+.result-item.small-text span#resultTimezone, /* Target specific spans if needed */
+.result-item.small-text span#resultLatLon {
      color: #666;
-     font-weight: normal; /* Make DST/LatLon values normal weight */
+     font-weight: normal; /* Make LatLon/Timezone values normal weight */
 }
 
 /* --- Attribution --- */
@@ -214,6 +294,16 @@ h1 {
     text-align: center;
     margin-top: 15px;
 }
+
+/* Style for the disclaimer text */
+.disclaimer {
+    font-size: 0.8em;
+    color: #777;
+    text-align: center;
+    margin-top: 15px;
+    padding: 0 10px; /* Add some padding */
+}
+
 
 /* --- Responsiveness --- */
 @media (max-width: 640px) {
@@ -229,38 +319,7 @@ h1 {
      h1 {
         font-size: 1.8rem;
     }
+    .result-item {
+        padding: 10px 0; /* Slightly more vertical padding on small screens */
+    }
 }
-
-/* --- Add or modify these styles in your style.css --- */
-
-/* Style the select dropdown like other inputs */
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    background-color: white; /* Ensure background color */
-    appearance: none; /* Optional: for custom arrow later if desired */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    /* Add basic arrow indicator */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 10px auto;
-    padding-right: 30px; /* Make space for arrow */
-    cursor: pointer;
-}
-
-/* Style for the disclaimer text */
-.disclaimer {
-    font-size: 0.8em;
-    color: #777;
-    text-align: center;
-    margin-top: 15px;
-    padding: 0 10px; /* Add some padding */
-}
-
-/* --- Keep all your other existing CSS rules --- */

@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial Time Calculator</title>
+    <title>Celestial Time Calculator (Zmanim)</title>
+    <!-- Ensure this path is correct relative to index.html -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="card">
-            <h1>Zmanim (Experimental)</h1>
-            <p>Calculate Sunrise, Noon, Sunset, and Dusk based on NOAA algorithms.</p>
+            <h1>Celestial Time Calculator (Zmanim)</h1>
+            <p>Calculate key solar event times based on NOAA algorithms.</p>
 
             <form id="calculationForm">
                 <div class="form-group">
                     <label for="citySelect">City:</label>
-                    <select id="citySelect" required></select> <!-- Changed from input to select -->
+                    <select id="citySelect" required></select>
                 </div>
 
                 <div class="form-group">
@@ -24,8 +25,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="duskAngleInput">Dusk Angle (below horizon):</label>
-                    <input type="number" id="duskAngleInput" value="5" min="0" max="90" step="0.1" required>
+                    <label for="dawnAngleInput">Dawn (Alos) Angle (below horizon):</label>
+                    <input type="number" id="dawnAngleInput" value="16.1" min="0" max="90" step="0.1" required>
+                    <span>°</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="duskAngleInput">Dusk (Tzais) Angle (below horizon):</label>
+                    <input type="number" id="duskAngleInput" value="5.0" min="0" max="90" step="0.1" required>
                     <span>°</span>
                 </div>
 
@@ -42,15 +49,24 @@
 
             <div id="errorDisplay" class="error-message" style="display: none;"></div>
 
+            <!-- Results Card -->
             <div id="resultsCard" class="results-card" style="display: none;">
                 <h2 id="resultLocation"></h2>
                 <p id="resultDate"></p>
+                 <div class="result-item">
+                    <span>Alos (<span id="resultDawnAngle"></span>°):</span>
+                    <strong id="resultAlos"></strong>
+                </div>
                 <div class="result-item">
-                    <span>Sunrise:</span>
+                    <span>Sunrise (Netz):</span>
                     <strong id="resultSunrise"></strong>
                 </div>
                 <div class="result-item">
-                    <span>Solar Noon:</span>
+                    <span>Latest Shema (Gra):</span>
+                    <strong id="resultSZSGra"></strong>
+                </div>
+                <div class="result-item">
+                    <span>Solar Noon (Chatzos):</span>
                     <strong id="resultSolarNoon"></strong>
                 </div>
                 <div class="result-item">
@@ -58,8 +74,13 @@
                     <strong id="resultSunset"></strong>
                 </div>
                  <div class="result-item">
-                    <span>Dusk (<span id="resultDuskAngle"></span>°):</span>
+                    <span>Dusk/Tzais (<span id="resultDuskAngle"></span>°):</span>
                     <strong id="resultDusk"></strong>
+                </div>
+                <hr style="border: none; border-top: 1px solid #d6e9ff; margin: 10px 0;">
+                <div class="result-item">
+                    <span>Seasonal Hour (Sha'as Zmanios):</span>
+                    <strong id="resultShaasZmanios"></strong>
                 </div>
                  <div class="result-item small-text">
                     <span>Timezone:</span>
@@ -73,13 +94,13 @@
              <div class="attribution">
                 Calculations based on NOAA GML Solar Calculator algorithms. Location data self-contained.
              </div>
-             <!-- Added Disclaimer -->
              <p class="disclaimer">
-                 Note: Calculated times are based on standard algorithms and may differ by up to a minute from other sources due to rounding, algorithm variations, or specific definitions (e.g., for religious times).
+                 Note: Calculated times are based on standard algorithms and may differ by up to a minute from other sources due to rounding, algorithm variations, specific definitions (e.g., elevation, refraction models), or approximations (e.g., Delta T). Zmanim calculations are based directly on the computed sunrise/sunset times.
              </p>
         </div>
     </div>
 
+    <!-- Ensure this path is correct relative to index.html -->
     <script src="script.js"></script>
 </body>
 </html>
