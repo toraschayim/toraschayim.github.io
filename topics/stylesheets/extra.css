@@ -1,5 +1,13 @@
-body, h1, h2, h3, p {
-  font-family: "Times New Roman", Roboto, serif !important;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--md-primary-fg-color) !important;
 }
 
 
+/* Style horizontal rules as short dividers */
+.md-typeset hr {
+  width: 40%;              /* make it shorter */
+  margin: 1.5em auto;      /* center it */
+  border: none;            /* remove default */
+  border-top: 3px solid var(--md-primary-fg-color); /* match theme color */
+  border-radius: 2px;
+}
